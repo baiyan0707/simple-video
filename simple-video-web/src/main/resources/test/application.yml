@@ -1,0 +1,31 @@
+# log
+logging:
+  level: info
+
+##------------------------serverInfo--------------------------#
+server:
+  port: 31200
+  address: 0.0.0.0
+
+##------------------------databaseInfo-------------------------#
+mybatis:
+  type-aliases-package: com.simple.dao.model
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/**/*Mapper.xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.27.249.235:3306/simple_video_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+  ##---------------------------redisInfo--------------------------#
+  redis:
+    host: 120.27.249.235
+    port: 6379
+    password: 12345678
+##--------------------------integration-------------------------#
+
+##--------------------------systemInfo--------------------------#
+
+#--------------------cro------------------------#

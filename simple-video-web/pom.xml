@@ -21,10 +21,11 @@
             <artifactId>simple-video-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.simple</groupId>
+            <artifactId>simple-video-service</artifactId>
         </dependency>
     </dependencies>
+
 
 
 </project>

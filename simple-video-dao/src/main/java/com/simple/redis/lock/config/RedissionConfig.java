@@ -7,14 +7,14 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 /**
  * 本类用作redis的配置
  */
-@Service
+@Component
 public class RedissionConfig {
 
     @Value("${spring.redis.host}")
@@ -32,7 +32,7 @@ public class RedissionConfig {
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisson() throws IOException {
         Config config = new Config();
-        config.useSingleServer().setAddress(host + ":" + port).setPassword(password);
+        config.useSingleServer().setAddress(host + ":" + port);
         return Redisson.create(config);
     }
 

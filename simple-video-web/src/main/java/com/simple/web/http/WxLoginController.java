@@ -15,13 +15,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
-import java.util.Optional;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,13 +35,11 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WxLoginController {
 
-    //@Value("${wechat.appid}")
-    private String appid = "wx1f9bf6eaad8130e4";
+    @Value("${wechat.appsecret}")
+    private String appsecret;
 
-    //@Value("${wechat.appsecret}")
-    private String appsecret = "753b6de191053806eada02a683bc35d2";
-
-    private String openid;
+    @Value("${wechat.appid}")
+    private String appid;
 
     @Autowired
     private IUserService userService;
@@ -48,15 +47,20 @@ public class WxLoginController {
     @Autowired
     RedisUtil redisUtil;
 
-    @PostMapping("/wxLogin/{code}")
+    @PostMapping("/wxLogin")
     @ResponseBody
-    public String wxLogin(@PathVariable(value = "code") String code) {
+    public String wxLogin(@RequestBody Map<String, String> userInfoMap) {
+       if(userInfoMap.isEmpty()){
+           log.error("请求参数非法{}",userInfoMap);
+           throw new GlobalException(SimpleVideoErrorCode.SIMPLEVIDEO_ERROR_CODE_000001);
+       }
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String resultString = "";
-        CloseableHttpResponse response = null;
+        CloseableHttpResponse response;
+        String code = userInfoMap.get("code");
 
-        String url="https://api.weixin.qq.com/sns/jscode2session?appid="+appid+"&secret="+appsecret+"&js_code="+code+"&grant_type=authorization_code";
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + appsecret + "&js_code=" + code + "&grant_type=authorization_code";
         try {
             // 创建uri
             URIBuilder builder = new URIBuilder(url);
@@ -73,26 +77,30 @@ public class WxLoginController {
             }
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new GlobalException(SimpleVideoErrorCode.SIMPLEVIDEO_ERROR_CODE_999999,e.getMessage());
+            throw new GlobalException(SimpleVideoErrorCode.SIMPLEVIDEO_ERROR_CODE_999999, e.getMessage());
         }
         // 解析json
         JSONObject jsonObject = (JSONObject) JSONObject.parse(resultString);
-        openid = jsonObject.get("openid")+"";
+        String openid = jsonObject.get("openid") + "";
 
         //判断当前用户是否存在
-        Optional<User> optional = userService.findUserByOpenId(openid);
-        if(!optional.isPresent()){
+        User user = userService.findUserByOpenId(openid);
+        if (user == null) {
             //新用户
-            User user = new User();
+            user = new User();
             user.setOpenId(openid);
+            user.setNickname(userInfoMap.get("nike"));
+            user.setSex(Integer.parseInt(userInfoMap.get("sex")));
+            user.setAvatar(userInfoMap.get("avaurl"));
             userService.insertUserInfo(user);
         }
 
         //生成3rd_session码返回给前台
-        String sessionCode = MD5.getSignKey(32);
-        //将openid和生成的session存入redis
-        redisUtil.setEx(sessionCode,openid,12, TimeUnit.HOURS);
+        String rdSessionKey = MD5.getSignKey(32);
+        //将openid、session和生成的session存入redis
+        String sessionKey = jsonObject.get("session_key") + "";
+        redisUtil.setEx(rdSessionKey, sessionKey+":"+openid, 12, TimeUnit.HOURS);
 
-        return sessionCode;
+        return rdSessionKey;
     }
 }

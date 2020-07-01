@@ -7,21 +7,23 @@ server:
 mybatis:
   type-aliases-package: com.simple.dao.model
   config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/**/*Mapper.xml
+  mapper-locations: classpath*:mybatis/mapper/simple/**/*Mapper.xml
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.27.249.235:3306/simple_video_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    ## url: jdbc:mysql://120.27.249.235:3306/simple_video_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/simple_video_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: root
+    ## password: simplevideomysql
+    password: rootmysql
 
-## redis
+  ## redis
   redis:
     host: 120.27.249.235
     port: 6379
-    password: 12345678
+    password: simplevideoredis
 
-# wechat
+  # wechat
 wechat:
   appid: wx1f9bf6eaad8130e4
   appsecret: 753b6de191053806eada02a683bc35d2
@@ -31,4 +33,3 @@ logging:
   path: ./logs/
   level:
     root: info
-

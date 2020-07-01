@@ -38,4 +38,3 @@ target/
 #macos
 .DS_Store
 UnitTest.java
-logback.xml

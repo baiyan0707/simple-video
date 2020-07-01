@@ -3,7 +3,6 @@ package com.simple.service.impl.user;
 import com.simple.commons.exception.GlobalException;
 import com.simple.commons.exception.SimpleVideoErrorCode;
 import com.simple.dao.mapper.user.UserMapper;
-import com.simple.dao.model.user.User;
 import com.simple.service.user.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

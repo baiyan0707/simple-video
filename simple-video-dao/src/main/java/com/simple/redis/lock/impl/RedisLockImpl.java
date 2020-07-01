@@ -3,7 +3,6 @@ package com.simple.redis.lock.impl;
 import com.simple.redis.lock.ILocker;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 

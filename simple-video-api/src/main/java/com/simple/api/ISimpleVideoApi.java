@@ -9,6 +9,6 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "简视频接口",tags = "simple-video-api")
 public interface ISimpleVideoApi {
 
-    @ApiOperation("测试接口")
+    @ApiOperation("接口测试")
     String test(String str);
 }

@@ -168,6 +168,34 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.61</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include>
+                </includes>
+                <excludes>
+                    <exclude>dev/*</exclude>
+                    <exclude>prod/*</exclude>
+                    <exclude>test/*</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources/${profiles.active}</directory>
+            </resource>
+        </resources>
+    </build>
 
 </project>

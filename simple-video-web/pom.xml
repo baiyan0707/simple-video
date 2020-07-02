@@ -21,8 +21,8 @@
             <artifactId>simple-video-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.simple</groupId>
-            <artifactId>simple-video-service</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

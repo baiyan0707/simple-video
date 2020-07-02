@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simple.dao.mapper.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.simple.dao.model.user.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="phone" jdbcType="INTEGER" property="phone"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="attentions" jdbcType="INTEGER" property="attentions"/>
+        <result column="fans" jdbcType="INTEGER" property="fans"/>
+        <result column="mask" jdbcType="VARCHAR" property="mask"/>
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt"/>
+        <result column="update_at" jdbcType="TIMESTAMP" property="updateAt"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, open_id, phone, nickname, sex, avatar, attentions, fans, mask, create_at, update_at, create_by,
+    update_by
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user`
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `user`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.simple.dao.model.user.User">
+    insert into `user` (id, open_id, phone,nickname,
+      sex, avatar, attentions,
+      fans, mask, create_at, update_at,
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR},#{phone,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR},
+      #{sex,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}, #{attentions,jdbcType=INTEGER},
+      #{fans,jdbcType=INTEGER}, #{mask,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.simple.dao.model.user.User">
+        insert into `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="attentions != null">
+                attentions,
+            </if>
+            <if test="fans != null">
+                fans,
+            </if>
+            <if test="mask != null">
+                mask,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="attentions != null">
+                #{attentions,jdbcType=INTEGER},
+            </if>
+            <if test="fans != null">
+                #{fans,jdbcType=INTEGER},
+            </if>
+            <if test="mask != null">
+                #{mask,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.simple.dao.model.user.User">
+        update `user`
+        <set>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="attentions != null">
+                attentions = #{attentions,jdbcType=INTEGER},
+            </if>
+            <if test="fans != null">
+                fans = #{fans,jdbcType=INTEGER},
+            </if>
+            <if test="mask != null">
+                mask = #{mask,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.simple.dao.model.user.User">
+    update `user`
+    set open_id = #{openId,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      attentions = #{attentions,jdbcType=INTEGER},
+      fans = #{fans,jdbcType=INTEGER},
+      mask = #{mask,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 根据openid获取用户信息 -->
+    <select id="findUserByOpenId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user` where open_id = #{openid};
+    </select>
+</mapper>

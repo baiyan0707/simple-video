@@ -32,7 +32,7 @@ public class RedissionConfig {
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisson() throws IOException {
         Config config = new Config();
-        config.useSingleServer().setAddress(host + ":" + port);
+        config.useSingleServer().setAddress(host + ":" + port).setPassword(password);
         return Redisson.create(config);
     }
 

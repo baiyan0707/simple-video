@@ -43,8 +43,6 @@ public class WxLoginController {
     @Value("${wechat.appsecret}")
     private String appsecret;
 
-    private static String openid;
-
     @Autowired
     private IUserService userService;
 

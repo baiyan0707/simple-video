@@ -15,12 +15,10 @@
         <dependency>
             <groupId>com.simple</groupId>
             <artifactId>simple-video-commons</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.simple</groupId>
             <artifactId>simple-video-dao</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

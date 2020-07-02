@@ -2,7 +2,9 @@ package com.simple.web.http;
 
 import com.simple.api.ISimpleVideoApi;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author bai
@@ -13,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class SimpleVideoApiImpl implements ISimpleVideoApi {
 
-    @Override
-    @PostMapping("/api/test")
-    @ResponseBody
-    public String test(@RequestParam(value = "str") String str) {
-        return str;
+        @Override
+        @PostMapping("/api/test")
+        @ResponseBody
+        public String test(String str) {
+            return str;
+        }
     }
-}

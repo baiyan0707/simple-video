@@ -8,9 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author bai
- * @Description 用户操作
+ * @Description
  * @Date 2020/3/11 10:52 PM
  */
 @Service
@@ -20,11 +22,6 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-    /**
-     * @see IUserService#insertUserInfo(User)
-     * @param user
-     * @throws GlobalException
-     */
     @Override
     public void insertUserInfo(User user) throws GlobalException {
         int result = userMapper.insertSelective(user);
@@ -36,7 +33,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * @see IUserService#findUserByOpenId(String)
+     * @see UserServiceImpl#findUserByOpenId(String)
      * @param openid
      * @return
      */

@@ -7,17 +7,17 @@
             </Pattern>
         </layout>
     </appender>
-    <!--按天生成日志-->
+	<!--按天生成日志-->
     <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>../data/logs/simple-video.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/data/logs/simple-video.%d{yyyy-MM-dd}.log</fileNamePattern>
-        </rollingPolicy>
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
+          <file>../data/logs/simple-video.log</file>
+		  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			 <fileNamePattern>/data/logs/simple-video.%d{yyyy-MM-dd}.log</fileNamePattern>
+		  </rollingPolicy>
+          <layout class="ch.qos.logback.classic.PatternLayout">
+               <Pattern>
                 <pattern>%d{HH:mm:ss}  traceId:%X{traceId}  [%thread] %-5level %logger{36} [%method] [%line] - %msg%n</pattern>
-            </Pattern>
-        </layout>
+               </Pattern>
+          </layout>
     </appender>
     <logger name="io.github.biezhi.wechat" level="debug" additivity="false">
         <appender-ref ref="STDOUT" />

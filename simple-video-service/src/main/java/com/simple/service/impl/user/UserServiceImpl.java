@@ -39,7 +39,7 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public Optional<User> findUserByOpenId(String openid) {
+    public User findUserByOpenId(String openid) {
         return userMapper.findUserByOpenId(openid);
     }
 }

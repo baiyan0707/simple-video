@@ -8,6 +8,7 @@ import com.simple.redis.utils.RedisUtil;
 import com.simple.service.user.IUserService;
 import com.simple.util.MD5;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,13 +37,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WxLoginController {
 
-    //@Value("${wechat.appid}")
-    private String appid = "wx1f9bf6eaad8130e4";
+    @Value("${wechat.appid}")
+    private String appid;
 
-    //@Value("${wechat.appsecret}")
-    private String appsecret = "753b6de191053806eada02a683bc35d2";
+    @Value("${wechat.appsecret}")
+    private String appsecret;
 
-    private String openid;
+    private static String openid;
 
     @Autowired
     private IUserService userService;
@@ -84,6 +86,11 @@ public class WxLoginController {
         // 解析json
         JSONObject jsonObject = (JSONObject) JSONObject.parse(resultString);
         String openid = jsonObject.get("openid") + "";
+
+        if(Objects.equals("null",openid) || StringUtils.isBlank(openid)){
+            log.error("请求参数非法:{}",openid);
+            throw new GlobalException(SimpleVideoErrorCode.SIMPLEVIDEO_ERROR_CODE_000002);
+        }
 
         //判断当前用户是否存在
         User user = userService.findUserByOpenId(openid);

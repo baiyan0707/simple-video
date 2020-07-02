@@ -2,6 +2,8 @@ package com.simple.service.user;
 
 import com.simple.dao.model.user.User;
 
+import java.util.Optional;
+
 /**
  * @author bai
  */
@@ -12,7 +14,7 @@ public interface IUserService {
      * @param openid
      * @return
      */
-    User findUserByOpenId(String openid);
+    Optional<User> findUserByOpenId(String openid);
 
     /**
      * 添加用户

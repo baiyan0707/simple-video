@@ -26,10 +26,10 @@ public class Application {
         SpringApplication.run(Application.class,args);
     }
 
-    private final static String DATASOURCE_PREFIX = "spring.datasource";
+    private final static String DATASOURCE_PREIFX = "spring.datasource";
 
     @Bean
-    @ConfigurationProperties(prefix = DATASOURCE_PREFIX)
+    @ConfigurationProperties(prefix = DATASOURCE_PREIFX)
     public DataSource dataSource() {
         return new org.apache.tomcat.jdbc.pool.DataSource();
     }
@@ -41,8 +41,7 @@ public class Application {
         sqlSessionFactoryBean.setDataSource(dataSource());
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(
-                resolver.getResources("classpath*:/mybatis/mapper/**/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/mapper/*.xml"));
 
         return sqlSessionFactoryBean.getObject();
     }

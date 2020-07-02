@@ -35,11 +35,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WxLoginController {
 
-    @Value("${wechat.appsecret}")
-    private String appsecret;
+    //@Value("${wechat.appid}")
+    private String appid = "wx1f9bf6eaad8130e4";
 
-    @Value("${wechat.appid}")
-    private String appid;
+    //@Value("${wechat.appsecret}")
+    private String appsecret = "753b6de191053806eada02a683bc35d2";
+
+    private String openid;
 
     @Autowired
     private IUserService userService;

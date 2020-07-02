@@ -3,6 +3,8 @@ package com.simple.dao.mapper.user;
 import com.simple.dao.model.user.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Optional;
+
 /**
  * @author bai
  */
@@ -24,5 +26,5 @@ public interface UserMapper {
      * @param openid
      * @return
      */
-    User findUserByOpenId(@Param("openid") String openid);
+    Optional<User> findUserByOpenId(@Param("openid") String openid);
 }
